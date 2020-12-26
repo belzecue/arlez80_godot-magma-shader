@@ -10,11 +10,6 @@ render_mode unshaded;
 uniform float speed = 0.05;
 uniform sampler2D color;
 
-float lerp( float a, float b, float s )
-{
-	return a * ( 1.0 - s ) + b * s;
-}
-
 float random( vec2 pos )
 { 
 	return fract(sin(dot(pos, vec2(12.9898,78.233))) * 43758.5453);
@@ -37,7 +32,7 @@ float value_noise( vec2 pos )
 
 	vec2 u = f * f * ( 3.0 - 2.0 * f );
 
-	return lerp( lerp( v00, v10, u.x ), lerp( v01, v11, u.x ), u.y );
+	return mix( mix( v00, v10, u.x ), mix( v01, v11, u.x ), u.y );
 }
 
 void fragment( )
